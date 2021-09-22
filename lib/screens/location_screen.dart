@@ -10,6 +10,8 @@ class LocationScreen extends StatefulWidget {
 }
 
 class _LocationScreenState extends State<LocationScreen> {
+  String cityName = '';
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -60,11 +62,13 @@ class _LocationScreenState extends State<LocationScreen> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Padding(
-                            padding: EdgeInsets.symmetric(
-                                vertical: 30.0, horizontal: 30.0),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 30.0,
+                              horizontal: 30.0,
+                            ),
                             child: TextField(
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                 hintText: 'Search Here',
                                 contentPadding: EdgeInsets.only(
                                     left: 30.0, top: 15.0, bottom: 15.0),
@@ -88,6 +92,9 @@ class _LocationScreenState extends State<LocationScreen> {
                                 ),
                               ),
                               style: buttonTextStyle,
+                              onChanged: (String value) {
+                                cityName = value;
+                              },
                             ),
                           ),
                           Padding(
@@ -96,7 +103,6 @@ class _LocationScreenState extends State<LocationScreen> {
                               constraints: const BoxConstraints.tightFor(
                                   width: 220.0, height: 55.0),
                               child: ElevatedButton(
-                                onPressed: () {},
                                 style: ButtonStyle(
                                   backgroundColor:
                                       MaterialStateProperty.all<Color>(
@@ -113,8 +119,13 @@ class _LocationScreenState extends State<LocationScreen> {
                                   shadowColor: MaterialStateProperty.all<Color>(
                                       Colors.black),
                                 ),
-                                child: const Text('Get Weather',
-                                    style: buttonTextStyle),
+                                child: const Text(
+                                  'Get Weather',
+                                  style: buttonTextStyle,
+                                ),
+                                onPressed: () {
+                                  Navigator.pop(context, cityName);
+                                },
                               ),
                             ),
                           ),

@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:weather_app/utilities/constants.dart';
 import '../services/weather.dart';
+import 'package:intl/intl.dart';
+
+import 'package:weather_app/widgets/weather_card.dart';
+
 import 'package:weather_app/screens/notification_screen.dart';
+import 'package:weather_app/screens/location_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({this.locationWeather});
@@ -14,12 +19,91 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  int temperature = 0;
+  String weatherIcon = '';
+  String cityName = '';
+  String weatherMessage = '';
+  int windSpeed = 0;
+  int humidity = 0;
+  String description = '';
+  String day = '';
+
   WeatherModel weather = WeatherModel();
 
   @override
-  Widget build(BuildContext context) {
-    // var weatherData = weather.getCityWeather('London');
+  void initState() {
+    super.initState();
 
+    updateUI(widget.locationWeather);
+  }
+
+  void updateUI(dynamic weatherData) {
+    setState(() {
+      if (weatherData == null) {
+        temperature = 0;
+        weatherIcon = 'Error';
+        weatherMessage = 'Unable to get weather data';
+        cityName = '';
+        windSpeed = 0;
+        humidity = 0;
+        description = 'No Description';
+        day = 'Today';
+
+        return;
+      } else {
+        if (weatherData['coord'] != null) {
+          dynamic temp = weatherData['main']['temp'];
+          temperature = temp.toInt();
+
+          dynamic wind = weatherData['wind']['speed'];
+          windSpeed = wind.toInt();
+
+          dynamic hum = weatherData['main']['humidity'];
+          humidity = hum.toInt();
+
+          dynamic timeStamp = weatherData['dt'];
+
+          var date = DateTime.fromMillisecondsSinceEpoch(timeStamp * 1000);
+          day = DateFormat('EEEE, d MMMM').format(date);
+
+          description = weatherData['weather'][0]['main'];
+
+          var condition = weatherData['weather'][0]['id'];
+
+          weatherIcon = weather.getWeatherIcon(condition);
+          weatherMessage = weather.getMessage(temperature);
+
+          cityName = weatherData['name'];
+        } else {
+          dynamic temp = weatherData['current']['temp'];
+          temperature = temp.toInt();
+
+          dynamic wind = weatherData['current']['wind_speed'];
+          windSpeed = wind.toInt();
+
+          dynamic hum = weatherData['current']['humidity'];
+          humidity = hum.toInt();
+
+          dynamic timeStamp = weatherData['current']['dt'];
+
+          var date = DateTime.fromMillisecondsSinceEpoch(timeStamp * 1000);
+          day = DateFormat('EEEE, d MMMM').format(date);
+
+          description = weatherData['current']['weather'][0]['main'];
+
+          var condition = weatherData['current']['weather'][0]['id'];
+
+          weatherIcon = weather.getWeatherIcon(condition);
+          weatherMessage = weather.getMessage(temperature);
+
+          cityName = weatherData['timezone'];
+        }
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(
         gradient: LinearGradient(
@@ -31,13 +115,15 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: Stack(children: [
-          Row(children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 105.0),
-              child: SvgPicture.asset('assets/svg/vector2.svg'),
-            ),
-            SvgPicture.asset('assets/svg/vector1.svg'),
-          ]),
+          Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 105.0),
+                child: SvgPicture.asset('assets/svg/vector2.svg'),
+              ),
+              SvgPicture.asset('assets/svg/vector1.svg'),
+            ],
+          ),
           SafeArea(
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 15.0),
@@ -52,10 +138,21 @@ class _HomeScreenState extends State<HomeScreen> {
                             'assets/svg/location_icon.svg',
                             color: Colors.white,
                           ),
-                          onTap: () {
-                            Navigator.pushNamed(context, '/location');
+                          onTap: () async {
+                            var typedName = await Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const LocationScreen()),
+                            );
+
+                            if (typedName != null) {
+                              var weatherData =
+                                  await weather.getCityWeather(typedName);
+
+                              updateUI(weatherData);
+                            }
                           }),
-                      const Text('Surabaya', style: headingTextStyle),
+                      Text(cityName, style: headingTextStyle),
                       GestureDetector(
                         child: SvgPicture.asset(
                           'assets/svg/bell.svg',
@@ -76,56 +173,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     ],
                   ),
                   Center(
-                    child: Image.asset('assets/images/sunny.png'),
+                    child: Text(weatherIcon, style: weatherIconTextStyle),
                   ),
-                  Container(
-                    width: 300.0,
-                    height: 310.0,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: Colors.white.withOpacity(0.4),
-                      border: Border.all(
-                        color: const Color(0xffafc3d7),
-                        width: 3.5,
-                      ),
-                    ),
-                    child: Column(
-                      children: [
-                        const Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Text(
-                            'Today, 12 September',
-                            style: cardTextStyle,
-                          ),
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.only(left: 10.0),
-                          child: Text('29°', style: cardTempTextStyle),
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Text('Sunny', style: cardStatusTextSyle),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            SvgPicture.asset('assets/svg/wind.svg'),
-                            const Text('Wind', style: cardTextStyle),
-                            // const Text('|', style: cardTextStyle),
-                            const Text('10 km/h', style: cardTextStyle),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            SvgPicture.asset('assets/svg/humidity.svg'),
-                            const Text('Hum     ', style: cardTextStyle),
-                            // const Text('|', style: cardTextStyle),
-                            const Text('54 %', style: cardTextStyle),
-                          ],
-                        ),
-                      ],
-                    ),
+                  WeatherCard(
+                    day: day,
+                    temp: temperature,
+                    desc: description,
+                    wind: windSpeed,
+                    hum: humidity,
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 25.0),
@@ -133,7 +188,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       constraints: const BoxConstraints.tightFor(
                           width: 230.0, height: 60.0),
                       child: ElevatedButton(
-                        onPressed: () {
+                        onPressed: () async {
                           Navigator.pushNamed(context, '/history');
                         },
                         style: ButtonStyle(

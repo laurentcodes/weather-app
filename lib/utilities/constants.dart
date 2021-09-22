@@ -10,6 +10,10 @@ const cardTextStyle = TextStyle(
   color: Colors.white,
 );
 
+const weatherIconTextStyle = TextStyle(
+  fontSize: 180.0,
+);
+
 const cardStatusTextSyle = TextStyle(
   fontSize: 20.0,
   color: Colors.white,
