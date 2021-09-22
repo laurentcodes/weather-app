@@ -8,7 +8,6 @@ class NotificationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: const Color(0xff84c1f0),
       child: Container(
         padding: const EdgeInsets.all(30.0),
         decoration: const BoxDecoration(

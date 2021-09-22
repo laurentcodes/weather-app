@@ -1,18 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:weather_app/utilities/constants.dart';
+import '../services/weather.dart';
 import 'package:weather_app/screens/notification_screen.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  HomeScreen({this.locationWeather});
+
+  final locationWeather;
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  WeatherModel weather = WeatherModel();
+
   @override
   Widget build(BuildContext context) {
+    // var weatherData = weather.getCityWeather('London');
+
     return Container(
       decoration: const BoxDecoration(
         gradient: LinearGradient(
@@ -58,6 +65,11 @@ class _HomeScreenState extends State<HomeScreen> {
                           showModalBottomSheet(
                             context: context,
                             builder: (context) => const NotificationScreen(),
+                            shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.only(
+                              topRight: Radius.circular(40.0),
+                              topLeft: Radius.circular(40.0),
+                            )),
                           );
                         },
                       ),
