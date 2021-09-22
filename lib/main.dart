@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'package:weather_app/screens/loading_screen.dart';
 import 'package:weather_app/screens/home_screen.dart';
-import 'package:weather_app/screens/history_screen.dart';
+import 'package:weather_app/screens/forecast_screen.dart';
 import 'package:weather_app/screens/location_screen.dart';
 import 'package:weather_app/screens/notification_screen.dart';
 
@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => LoadingScreen(),
         '/home': (context) => HomeScreen(),
-        '/history': (context) => HistoryScreen(),
+        '/history': (context) => ForecastScreen(),
         '/location': (context) => const LocationScreen(),
         '/notif': (context) => NotificationScreen(),
       },

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:weather_app/screens/history_screen.dart';
+import 'package:weather_app/screens/forecast_screen.dart';
 import 'package:weather_app/utilities/constants.dart';
 import '../services/weather.dart';
 import 'package:intl/intl.dart';
@@ -152,24 +152,25 @@ class _HomeScreenState extends State<HomeScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       GestureDetector(
-                          child: SvgPicture.asset(
-                            'assets/svg/location_icon.svg',
-                            color: Colors.white,
-                          ),
-                          onTap: () async {
-                            var typedName = await Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const LocationScreen()),
-                            );
+                        child: SvgPicture.asset(
+                          'assets/svg/location_icon.svg',
+                          color: Colors.white,
+                        ),
+                        onTap: () async {
+                          var typedName = await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const LocationScreen()),
+                          );
 
-                            if (typedName != null) {
-                              var weatherData =
-                                  await weather.getCityWeather(typedName);
+                          if (typedName != null) {
+                            var weatherData =
+                                await weather.getCityWeather(typedName);
 
-                              updateUI(weatherData);
-                            }
-                          }),
+                            updateUI(weatherData);
+                          }
+                        },
+                      ),
                       Text(cityName, style: headingTextStyle),
                       GestureDetector(
                         child: SvgPicture.asset(
@@ -204,7 +205,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => HistoryScreen(
+                              builder: (context) => ForecastScreen(
                                 weatherDataHistory: widget.locationWeather,
                               ),
                             ),
@@ -223,7 +224,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           shadowColor:
                               MaterialStateProperty.all<Color>(Colors.black),
                         ),
-                        child: const Text('History', style: buttonTextStyle),
+                        child: const Text('Forecast', style: buttonTextStyle),
                       ),
                     ),
                   )

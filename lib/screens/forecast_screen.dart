@@ -3,24 +3,29 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:weather_app/utilities/constants.dart';
-import 'package:weather_app/utilities/history_hour_item.dart';
 import '../services/weather.dart';
 import 'package:intl/intl.dart';
-import 'package:weather_app/widgets/today_temps.dart';
 
-class HistoryScreen extends StatefulWidget {
-  HistoryScreen({this.weatherDataHistory});
+import 'package:weather_app/widgets/today_temps.dart';
+import 'package:weather_app/widgets/forecast.dart';
+
+class ForecastScreen extends StatefulWidget {
+  ForecastScreen({this.weatherDataHistory});
 
   final weatherDataHistory;
 
   @override
-  _HistoryScreenState createState() => _HistoryScreenState();
+  _ForecastScreenState createState() => _ForecastScreenState();
 }
 
-class _HistoryScreenState extends State<HistoryScreen> {
+class _ForecastScreenState extends State<ForecastScreen> {
   List fiveHoursTemp = [];
   List fiveHoursTime = [];
   List fiveHoursIcon = [];
+
+  List fiveDaysTemp = [];
+  List fiveDaysDate = [];
+  List fiveDaysIcon = [];
 
   WeatherModel weather = WeatherModel();
 
@@ -39,18 +44,31 @@ class _HistoryScreenState extends State<HistoryScreen> {
         List<dynamic> hourly = weatherData['hourly'];
         List<dynamic> fiveHoursData = hourly.sublist(0, 6);
 
+        List<dynamic> daily = weatherData['daily'];
+        List<dynamic> fiveDaysData = daily.sublist(1, 7);
+
         for (int i = 0; i < fiveHoursData.length; i++) {
-          var date = DateTime.fromMillisecondsSinceEpoch(
+          var dateFiveHours = DateTime.fromMillisecondsSinceEpoch(
               fiveHoursData[i]['dt'] * 1000);
-          var day = DateFormat('HH:MM').format(date);
+          var day = DateFormat('HH:MM').format(dateFiveHours);
 
-          var condition = fiveHoursData[i]['weather'][0]['id'];
+          var dateFiveDays =
+              DateTime.fromMillisecondsSinceEpoch(fiveDaysData[i]['dt'] * 1000);
+          var date = DateFormat('MMM, d').format(dateFiveDays);
 
-          var weatherIcon = weather.getWeatherIcon(condition);
+          var conditionFiveHours = fiveHoursData[i]['weather'][0]['id'];
+          var weatherIconFiveHours = weather.getWeatherIcon(conditionFiveHours);
+
+          var conditionFiveDays = fiveDaysData[i]['weather'][0]['id'];
+          var weatherIconFiveDays = weather.getWeatherIcon(conditionFiveDays);
 
           fiveHoursTemp.add(fiveHoursData[i]['temp']);
           fiveHoursTime.add(day);
-          fiveHoursIcon.add(weatherIcon);
+          fiveHoursIcon.add(weatherIconFiveHours);
+
+          fiveDaysTemp.add(fiveDaysData[i]['temp']['day']);
+          fiveDaysDate.add(date);
+          fiveDaysIcon.add(weatherIconFiveDays);
         }
       }
     });
@@ -115,7 +133,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                       const Padding(
                         padding: EdgeInsets.only(top: 30.0, left: 30.0),
                         child: Text(
-                          'Today',
+                          'Today - 5 Hours',
                           style: historyHeadingTextStyle,
                         ),
                       ),
@@ -156,7 +174,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                       const Padding(
                         padding: EdgeInsets.only(top: 30.0, left: 30.0),
                         child: Text(
-                          'History - Last 5 Days',
+                          'Forecast - Next 5 Days',
                           style: historyHeadingTextStyle,
                         ),
                       ),
@@ -164,61 +182,30 @@ class _HistoryScreenState extends State<HistoryScreen> {
                         padding: const EdgeInsets.only(top: 30.0),
                         child: Column(
                           children: [
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: 20.0),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: const [
-                                  Text('Sep, 13', style: bodyTextStyle),
-                                  Text('🌩', style: bodyTextIconStyle),
-                                  Text('21°', style: bodyTextStyle),
-                                ],
-                              ),
+                            Forecast(
+                              temp: fiveDaysTemp[0].toInt(),
+                              date: fiveDaysDate[0],
+                              icon: fiveDaysIcon[0],
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: 20.0),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: const [
-                                  Text('Sep, 14', style: bodyTextStyle),
-                                  Text('🌧', style: bodyTextIconStyle),
-                                  Text('22°', style: bodyTextStyle),
-                                ],
-                              ),
+                            Forecast(
+                              temp: fiveDaysTemp[1].toInt(),
+                              date: fiveDaysDate[1],
+                              icon: fiveDaysIcon[1],
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: 20.0),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: const [
-                                  Text('Sep, 15', style: bodyTextStyle),
-                                  Text('☀️', style: bodyTextIconStyle),
-                                  Text('34°', style: bodyTextStyle),
-                                ],
-                              ),
+                            Forecast(
+                              temp: fiveDaysTemp[2].toInt(),
+                              date: fiveDaysDate[2],
+                              icon: fiveDaysIcon[2],
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: 20.0),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: const [
-                                  Text('Sep, 16', style: bodyTextStyle),
-                                  Text('☁️', style: bodyTextIconStyle),
-                                  Text('27°', style: bodyTextStyle),
-                                ],
-                              ),
+                            Forecast(
+                              temp: fiveDaysTemp[3].toInt(),
+                              date: fiveDaysDate[3],
+                              icon: fiveDaysIcon[3],
                             ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: const [
-                                Text('Sep, 17', style: bodyTextStyle),
-                                Text('🌫', style: bodyTextIconStyle),
-                                Text('32°', style: bodyTextStyle),
-                              ],
+                            Forecast(
+                              temp: fiveDaysTemp[4].toInt(),
+                              date: fiveDaysDate[4],
+                              icon: fiveDaysIcon[4],
                             ),
                           ],
                         ),

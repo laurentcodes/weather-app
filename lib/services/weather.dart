@@ -5,6 +5,7 @@ const apiKey = '8f73e23d479e43a847d682e8089e601f';
 final openWeatherMapURL = Uri.parse(
   'https://api.openweathermap.org/data/2.5/onecall',
 );
+
 final openWeatherMapCityURL = Uri.parse(
   'https://api.openweathermap.org/data/2.5/weather',
 );

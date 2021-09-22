@@ -17,6 +17,8 @@ class WeatherCard extends StatelessWidget {
   int wind;
   int hum;
 
+  var toggle = 0;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -33,18 +35,32 @@ class WeatherCard extends StatelessWidget {
       child: Column(
         children: [
           Padding(
-            padding: EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(8.0),
             child: Text(
               day,
               style: cardTextStyle,
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(left: 10.0),
-            child: Text('${temp.toString()}°', style: cardTempTextStyle),
+            padding: const EdgeInsets.only(left: 10.0),
+            child: GestureDetector(
+                child: Text('${temp.toString()}°', style: cardTempTextStyle),
+                onTap: () {
+                  if (toggle == 0) {
+                    temp = int.parse(((temp * 9 / 5) + 32).toStringAsFixed(0));
+                    toggle = 1;
+
+                    (context as Element).markNeedsBuild();
+                  } else {
+                    temp = int.parse(((temp - 32) * 5 / 9).toStringAsFixed(0));
+                    toggle = 0;
+
+                    (context as Element).markNeedsBuild();
+                  }
+                }),
           ),
           Padding(
-            padding: EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(8.0),
             child: Text(desc, style: cardStatusTextSyle),
           ),
           Row(

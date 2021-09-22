@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:weather_app/utilities/constants.dart';
 
+import '../screens/location_info_screen.dart';
+
 class LocationScreen extends StatefulWidget {
   const LocationScreen({Key? key}) : super(key: key);
 
@@ -124,7 +126,16 @@ class _LocationScreenState extends State<LocationScreen> {
                                   style: buttonTextStyle,
                                 ),
                                 onPressed: () {
-                                  Navigator.pop(context, cityName);
+                                  // Navigator.pop(context, cityName);
+
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => LocationInfoScreen(
+                                        city: cityName,
+                                      ),
+                                    ),
+                                  );
                                 },
                               ),
                             ),
