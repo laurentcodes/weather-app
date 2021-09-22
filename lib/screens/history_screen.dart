@@ -1,15 +1,61 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:weather_app/utilities/constants.dart';
+import 'package:weather_app/utilities/history_hour_item.dart';
+import '../services/weather.dart';
+import 'package:intl/intl.dart';
+import 'package:weather_app/widgets/today_temps.dart';
 
 class HistoryScreen extends StatefulWidget {
-  const HistoryScreen({Key? key}) : super(key: key);
+  HistoryScreen({this.weatherDataHistory});
+
+  final weatherDataHistory;
 
   @override
   _HistoryScreenState createState() => _HistoryScreenState();
 }
 
 class _HistoryScreenState extends State<HistoryScreen> {
+  List fiveHoursTemp = [];
+  List fiveHoursTime = [];
+  List fiveHoursIcon = [];
+
+  WeatherModel weather = WeatherModel();
+
+  @override
+  void initState() {
+    super.initState();
+
+    updateUI(widget.weatherDataHistory);
+  }
+
+  void updateUI(dynamic weatherData) {
+    setState(() {
+      if (weatherData == null) {
+        return;
+      } else {
+        List<dynamic> hourly = weatherData['hourly'];
+        List<dynamic> fiveHoursData = hourly.sublist(0, 6);
+
+        for (int i = 0; i < fiveHoursData.length; i++) {
+          var date = DateTime.fromMillisecondsSinceEpoch(
+              fiveHoursData[i]['dt'] * 1000);
+          var day = DateFormat('HH:MM').format(date);
+
+          var condition = fiveHoursData[i]['weather'][0]['id'];
+
+          var weatherIcon = weather.getWeatherIcon(condition);
+
+          fiveHoursTemp.add(fiveHoursData[i]['temp']);
+          fiveHoursTime.add(day);
+          fiveHoursIcon.add(weatherIcon);
+        }
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -79,40 +125,30 @@ class _HistoryScreenState extends State<HistoryScreen> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Column(
-                              children: const [
-                                Text('29°C', style: bodyTextStyle),
-                                Text('☀️', style: bodyTextIconStyle),
-                                Text('15:00', style: bodyTextStyle),
-                              ],
+                            TodayTemps(
+                              temp: fiveHoursTemp[0].toInt(),
+                              icon: fiveHoursIcon[0],
+                              time: fiveHoursTime[0],
                             ),
-                            Column(
-                              children: const [
-                                Text('29°C', style: bodyTextStyle),
-                                Text('☁️', style: bodyTextIconStyle),
-                                Text('16:00', style: bodyTextStyle),
-                              ],
+                            TodayTemps(
+                              temp: fiveHoursTemp[1].toInt(),
+                              icon: fiveHoursIcon[1],
+                              time: fiveHoursTime[1],
                             ),
-                            Column(
-                              children: const [
-                                Text('29°C', style: bodyTextStyle),
-                                Text('☀️', style: bodyTextIconStyle),
-                                Text('17:00', style: bodyTextStyle),
-                              ],
+                            TodayTemps(
+                              temp: fiveHoursTemp[2].toInt(),
+                              icon: fiveHoursIcon[2],
+                              time: fiveHoursTime[2],
                             ),
-                            Column(
-                              children: const [
-                                Text('29°C', style: bodyTextStyle),
-                                Text('🌧', style: bodyTextIconStyle),
-                                Text('18:00', style: bodyTextStyle),
-                              ],
+                            TodayTemps(
+                              temp: fiveHoursTemp[3].toInt(),
+                              icon: fiveHoursIcon[3],
+                              time: fiveHoursTime[3],
                             ),
-                            Column(
-                              children: const [
-                                Text('29°C', style: bodyTextStyle),
-                                Text('☀️', style: bodyTextIconStyle),
-                                Text('19:00', style: bodyTextStyle),
-                              ],
+                            TodayTemps(
+                              temp: fiveHoursTemp[4].toInt(),
+                              icon: fiveHoursIcon[4],
+                              time: fiveHoursTime[4],
                             ),
                           ],
                         ),

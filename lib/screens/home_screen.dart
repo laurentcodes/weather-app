@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:weather_app/screens/history_screen.dart';
 import 'package:weather_app/utilities/constants.dart';
 import '../services/weather.dart';
 import 'package:intl/intl.dart';
@@ -200,7 +201,14 @@ class _HomeScreenState extends State<HomeScreen> {
                           width: 230.0, height: 60.0),
                       child: ElevatedButton(
                         onPressed: () async {
-                          Navigator.pushNamed(context, '/history');
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => HistoryScreen(
+                                weatherDataHistory: widget.locationWeather,
+                              ),
+                            ),
+                          );
                         },
                         style: ButtonStyle(
                           backgroundColor:

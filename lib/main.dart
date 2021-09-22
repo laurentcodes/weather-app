@@ -20,9 +20,9 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => LoadingScreen(),
         '/home': (context) => HomeScreen(),
-        '/history': (context) => const HistoryScreen(),
+        '/history': (context) => HistoryScreen(),
         '/location': (context) => const LocationScreen(),
-        '/notif': (context) =>  NotificationScreen(),
+        '/notif': (context) => NotificationScreen(),
       },
       theme: ThemeData(textTheme: GoogleFonts.overpassTextTheme()),
     );
