@@ -56,58 +56,69 @@ class _LocationScreenState extends State<LocationScreen> {
                         Navigator.pop(context);
                       },
                     ),
-                    const Padding(
-                      padding: EdgeInsets.symmetric(
-                          vertical: 30.0, horizontal: 30.0),
-                      child: TextField(
-                        decoration: InputDecoration(
-                          hintText: 'Search Here',
-                          // prefixIcon: Icon(Icons.arrow_back),
-                          suffixIcon: Icon(Icons.mic, color: Color(0xff444e72)),
-                          hintStyle: buttonTextStyle,
-                          filled: true,
-                          fillColor: Colors.white70,
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(20.0)),
-                            borderSide:
-                                BorderSide(color: Colors.white, width: 2),
+                    Expanded(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Padding(
+                            padding: EdgeInsets.symmetric(
+                                vertical: 30.0, horizontal: 30.0),
+                            child: TextField(
+                              decoration: InputDecoration(
+                                hintText: 'Search Here',
+                                contentPadding: EdgeInsets.only(
+                                    left: 30.0, top: 15.0, bottom: 15.0),
+                                // prefixIcon: Icon(Icons.arrow_back),
+                                suffixIcon:
+                                    Icon(Icons.mic, color: Color(0xff444e72)),
+                                hintStyle: buttonTextStyle,
+                                filled: true,
+                                fillColor: Colors.white70,
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20.0)),
+                                  borderSide:
+                                      BorderSide(color: Colors.white, width: 2),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20.0)),
+                                  borderSide:
+                                      BorderSide(color: Colors.white, width: 2),
+                                ),
+                              ),
+                              style: buttonTextStyle,
+                            ),
                           ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(20.0)),
-                            borderSide:
-                                BorderSide(color: Colors.white, width: 2),
-                          ),
-                        ),
-                        style: buttonTextStyle,
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 25.0),
-                      child: ConstrainedBox(
-                        constraints: const BoxConstraints.tightFor(
-                            width: 220.0, height: 55.0),
-                        child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.pushNamed(context, '/history');
-                          },
-                          style: ButtonStyle(
-                            backgroundColor:
-                                MaterialStateProperty.all<Color>(Colors.white),
-                            foregroundColor:
-                                MaterialStateProperty.all<Color>(Colors.black),
-                            shape: MaterialStateProperty.all<OutlinedBorder>(
-                              RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20.0),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 25.0),
+                            child: ConstrainedBox(
+                              constraints: const BoxConstraints.tightFor(
+                                  width: 220.0, height: 55.0),
+                              child: ElevatedButton(
+                                onPressed: () {},
+                                style: ButtonStyle(
+                                  backgroundColor:
+                                      MaterialStateProperty.all<Color>(
+                                          Colors.white),
+                                  foregroundColor:
+                                      MaterialStateProperty.all<Color>(
+                                          Colors.black),
+                                  shape:
+                                      MaterialStateProperty.all<OutlinedBorder>(
+                                    RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20.0),
+                                    ),
+                                  ),
+                                  shadowColor: MaterialStateProperty.all<Color>(
+                                      Colors.black),
+                                ),
+                                child: const Text('Get Weather',
+                                    style: buttonTextStyle),
                               ),
                             ),
-                            shadowColor:
-                                MaterialStateProperty.all<Color>(Colors.black),
                           ),
-                          child:
-                              const Text('Get Weather', style: buttonTextStyle),
-                        ),
+                        ],
                       ),
                     ),
                   ],

@@ -39,6 +39,10 @@ const buttonTextStyle = TextStyle(
   fontSize: 18.0,
   color: Color(0xff444e72),
 );
+// const buttonHintTextStyle = TextStyle(
+//   fontSize: 18.0,
+//   color: Color(0xff444e72),
+// );
 
 const historyHeadingTextStyle = TextStyle(
   fontSize: 22.0,
