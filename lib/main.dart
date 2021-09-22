@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
         '/home': (context) => HomeScreen(),
         '/history': (context) => const HistoryScreen(),
         '/location': (context) => const LocationScreen(),
-        '/notif': (context) => const NotificationScreen(),
+        '/notif': (context) =>  NotificationScreen(),
       },
       theme: ThemeData(textTheme: GoogleFonts.overpassTextTheme()),
     );

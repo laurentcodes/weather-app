@@ -28,7 +28,24 @@ class _HomeScreenState extends State<HomeScreen> {
   String description = '';
   String day = '';
 
+  String message = '';
+  String conditionIcon = '';
+
   WeatherModel weather = WeatherModel();
+
+  void _showModalSheet(String message, String conditionIcon) {
+    showModalBottomSheet(
+      context: context,
+      builder: (builder) =>
+          NotificationScreen(message: message, conditionIcon: conditionIcon),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topRight: Radius.circular(40.0),
+          topLeft: Radius.circular(40.0),
+        ),
+      ),
+    );
+  }
 
   @override
   void initState() {
@@ -159,15 +176,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           color: Colors.white,
                         ),
                         onTap: () {
-                          showModalBottomSheet(
-                            context: context,
-                            builder: (context) => const NotificationScreen(),
-                            shape: const RoundedRectangleBorder(
-                                borderRadius: BorderRadius.only(
-                              topRight: Radius.circular(40.0),
-                              topLeft: Radius.circular(40.0),
-                            )),
-                          );
+                          setState(() {
+                            _showModalSheet(weatherMessage, weatherIcon);
+                          });
                         },
                       ),
                     ],

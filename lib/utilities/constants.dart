@@ -51,9 +51,13 @@ const notificationHeadTextStyle = TextStyle(
 );
 
 const notificationBodyTextStyle = TextStyle(
-  fontSize: 14.0,
+  fontSize: 15.0,
   color: Color(0xff444e72),
   fontWeight: FontWeight.w600,
+);
+
+const notificationIconTextStyle = TextStyle(
+  fontSize: 26.0,
 );
 
 const historyHeadingTextStyle = TextStyle(
