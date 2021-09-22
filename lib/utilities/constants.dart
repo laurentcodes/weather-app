@@ -37,5 +37,28 @@ const cardTempTextStyle = TextStyle(
 
 const buttonTextStyle = TextStyle(
   fontSize: 18.0,
-  color: Colors.black,
+  color: Color(0xff444e72),
+);
+
+const historyHeadingTextStyle = TextStyle(
+  fontSize: 22.0,
+  color: Colors.white,
+  fontWeight: FontWeight.w900,
+  shadows: [
+    Shadow(
+      blurRadius: 12.0,
+      color: Color(0xff94a4b0),
+      offset: Offset(3.5, 3.5),
+    )
+  ],
+);
+
+const bodyTextStyle = TextStyle(
+  fontSize: 20.0,
+  color: Colors.white,
+);
+
+const bodyTextIconStyle = TextStyle(
+  fontSize: 30.0,
+  color: Colors.white,
 );

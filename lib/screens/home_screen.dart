@@ -40,10 +40,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      SvgPicture.asset(
-                        'assets/svg/location_icon.svg',
-                        color: Colors.white,
-                      ),
+                      GestureDetector(
+                          child: SvgPicture.asset(
+                            'assets/svg/location_icon.svg',
+                            color: Colors.white,
+                          ),
+                          onTap: () {
+                            Navigator.pushNamed(context, '/location');
+                          }),
                       const Text('Surabaya', style: headingTextStyle),
                       SvgPicture.asset(
                         'assets/svg/bell.svg',
@@ -52,7 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ],
                   ),
                   Center(
-                    child: Image.asset('assets/images/sun.png'),
+                    child: Image.asset('assets/images/sunny.png'),
                   ),
                   Container(
                     width: 300.0,
@@ -80,7 +84,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         const Padding(
                           padding: EdgeInsets.all(8.0),
-                          child: Text('Cloudy', style: cardStatusTextSyle),
+                          child: Text('Sunny', style: cardStatusTextSyle),
                         ),
                         Padding(
                           padding: const EdgeInsets.all(3.0),
