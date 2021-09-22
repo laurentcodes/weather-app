@@ -39,10 +39,18 @@ const buttonTextStyle = TextStyle(
   fontSize: 18.0,
   color: Color(0xff444e72),
 );
-// const buttonHintTextStyle = TextStyle(
-//   fontSize: 18.0,
-//   color: Color(0xff444e72),
-// );
+
+const notificationHeadTextStyle = TextStyle(
+  fontSize: 22.0,
+  color: Color(0xff444e72),
+  fontWeight: FontWeight.w900,
+);
+
+const notificationBodyTextStyle = TextStyle(
+  fontSize: 14.0,
+  color: Color(0xff444e72),
+  fontWeight: FontWeight.w600,
+);
 
 const historyHeadingTextStyle = TextStyle(
   fontSize: 22.0,

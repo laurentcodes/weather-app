@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:weather_app/utilities/constants.dart';
-// import 'package:weather_app/screens/history_screen.dart';
+import 'package:weather_app/screens/notification_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -49,9 +49,17 @@ class _HomeScreenState extends State<HomeScreen> {
                             Navigator.pushNamed(context, '/location');
                           }),
                       const Text('Surabaya', style: headingTextStyle),
-                      SvgPicture.asset(
-                        'assets/svg/bell.svg',
-                        color: Colors.white,
+                      GestureDetector(
+                        child: SvgPicture.asset(
+                          'assets/svg/bell.svg',
+                          color: Colors.white,
+                        ),
+                        onTap: () {
+                          showModalBottomSheet(
+                            context: context,
+                            builder: (context) => const NotificationScreen(),
+                          );
+                        },
                       ),
                     ],
                   ),
@@ -86,29 +94,23 @@ class _HomeScreenState extends State<HomeScreen> {
                           padding: EdgeInsets.all(8.0),
                           child: Text('Sunny', style: cardStatusTextSyle),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(3.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              SvgPicture.asset('assets/svg/wind.svg'),
-                              const Text('Wind', style: cardTextStyle),
-                              const Text('|', style: cardTextStyle),
-                              const Text('10 km/h', style: cardTextStyle),
-                            ],
-                          ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            SvgPicture.asset('assets/svg/wind.svg'),
+                            const Text('Wind', style: cardTextStyle),
+                            // const Text('|', style: cardTextStyle),
+                            const Text('10 km/h', style: cardTextStyle),
+                          ],
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(3.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              SvgPicture.asset('assets/svg/humidity.svg'),
-                              const Text('Hum ', style: cardTextStyle),
-                              const Text('|', style: cardTextStyle),
-                              const Text('54 %', style: cardTextStyle),
-                            ],
-                          ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            SvgPicture.asset('assets/svg/humidity.svg'),
+                            const Text('Hum     ', style: cardTextStyle),
+                            // const Text('|', style: cardTextStyle),
+                            const Text('54 %', style: cardTextStyle),
+                          ],
                         ),
                       ],
                     ),
