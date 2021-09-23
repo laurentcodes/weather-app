@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => LoadingScreen(),
         '/home': (context) => HomeScreen(),
-        '/history': (context) => ForecastScreen(),
+        '/forecast': (context) => ForecastScreen(),
         '/location': (context) => const LocationScreen(),
         '/notif': (context) => NotificationScreen(),
       },
