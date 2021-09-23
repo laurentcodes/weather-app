@@ -61,7 +61,10 @@ class _NotificationScreenState extends State<NotificationScreen> {
                 style: notificationHeadTextStyle,
               ),
               GestureDetector(
-                child: SvgPicture.asset('assets/svg/close.svg'),
+                child: SvgPicture.asset(
+                  'assets/svg/close.svg',
+                  color: Color(0xff444e72),
+                ),
                 onTap: () => {
                   Navigator.pop(context),
                 },
