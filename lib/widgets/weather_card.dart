@@ -78,16 +78,13 @@ class WeatherCard extends StatelessWidget {
                     ],
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.only(top: 8.h),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      SvgPicture.asset('assets/svg/humidity.svg'),
-                      const Text('Hum     ', style: cardTextStyle),
-                      Text('${hum.toString()} %', style: cardTextStyle),
-                    ],
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    SvgPicture.asset('assets/svg/humidity.svg'),
+                    const Text('Hum     ', style: cardTextStyle),
+                    Text('${hum.toString()} %', style: cardTextStyle),
+                  ],
                 ),
               ],
             ),
