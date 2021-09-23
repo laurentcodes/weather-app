@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+
 import 'package:weather_app/services/weather.dart';
+
 import '../screens/home_screen.dart';
 
 class LoadingScreen extends StatefulWidget {
@@ -46,7 +48,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
         body: Center(
           child: SpinKitDoubleBounce(
             color: Colors.white,
-            size: 100.0,
+            size: 100,
           ),
         ),
       ),

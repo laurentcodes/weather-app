@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:weather_app/screens/forecast_screen.dart';
-import 'package:weather_app/utilities/constants.dart';
-import '../services/weather.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../services/weather.dart';
+
+import 'package:weather_app/utilities/constants.dart';
 
 import 'package:weather_app/widgets/weather_card.dart';
 
 import 'package:weather_app/screens/notification_screen.dart';
 import 'package:weather_app/screens/location_screen.dart';
+import 'package:weather_app/screens/forecast_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({this.locationWeather});
@@ -39,10 +42,10 @@ class _HomeScreenState extends State<HomeScreen> {
       context: context,
       builder: (builder) =>
           NotificationScreen(message: message, conditionIcon: conditionIcon),
-      shape: const RoundedRectangleBorder(
+      shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
-          topRight: Radius.circular(40.0),
-          topLeft: Radius.circular(40.0),
+          topRight: Radius.circular(40.r),
+          topLeft: Radius.circular(40.r),
         ),
       ),
     );
@@ -136,7 +139,7 @@ class _HomeScreenState extends State<HomeScreen> {
           Row(
             children: [
               Padding(
-                padding: const EdgeInsets.only(top: 105.0),
+                padding: EdgeInsets.only(top: 100.h),
                 child: SvgPicture.asset('assets/svg/vector2.svg'),
               ),
               SvgPicture.asset('assets/svg/vector1.svg'),
@@ -144,7 +147,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           SafeArea(
             child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 15.0),
+              padding: EdgeInsets.symmetric(vertical: 15.h),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -196,10 +199,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     hum: humidity,
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 25.0),
+                    padding: EdgeInsets.only(top: 25.h),
                     child: ConstrainedBox(
-                      constraints: const BoxConstraints.tightFor(
-                          width: 230.0, height: 60.0),
+                      constraints: BoxConstraints.tightFor(
+                        width: 230.w,
+                        height: 60.h,
+                      ),
                       child: ElevatedButton(
                         onPressed: () async {
                           Navigator.push(
@@ -218,13 +223,14 @@ class _HomeScreenState extends State<HomeScreen> {
                               MaterialStateProperty.all<Color>(Colors.black),
                           shape: MaterialStateProperty.all<OutlinedBorder>(
                             RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20.0),
+                              borderRadius: BorderRadius.circular(20.r),
                             ),
                           ),
                           shadowColor:
                               MaterialStateProperty.all<Color>(Colors.black),
                         ),
-                        child: const Text('Forecast', style: buttonTextStyle),
+                        child: const Text('Forecast History',
+                            style: buttonTextStyle),
                       ),
                     ),
                   )

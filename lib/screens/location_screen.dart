@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:weather_app/utilities/constants.dart';
 
 import '../screens/location_info_screen.dart';
@@ -31,7 +33,7 @@ class _LocationScreenState extends State<LocationScreen> {
             Row(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(top: 105.0),
+                  padding: EdgeInsets.only(top: 105.h),
                   child: SvgPicture.asset('assets/svg/vector2.svg'),
                 ),
                 SvgPicture.asset('assets/svg/vector1.svg'),
@@ -39,7 +41,7 @@ class _LocationScreenState extends State<LocationScreen> {
             ),
             SafeArea(
               child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 15.0),
+                padding: EdgeInsets.symmetric(vertical: 15.h),
                 child: Column(
                   children: [
                     GestureDetector(
@@ -65,15 +67,15 @@ class _LocationScreenState extends State<LocationScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.symmetric(
-                              vertical: 30.0,
-                              horizontal: 30.0,
+                            padding: EdgeInsets.symmetric(
+                              vertical: 30.h,
+                              horizontal: 30.w,
                             ),
                             child: TextField(
-                              decoration: const InputDecoration(
+                              decoration: InputDecoration(
                                 hintText: 'Search Here',
                                 contentPadding: EdgeInsets.only(
-                                    left: 30.0, top: 15.0, bottom: 15.0),
+                                    left: 30.w, top: 15.h, bottom: 15.h),
                                 // prefixIcon: Icon(Icons.arrow_back),
                                 suffixIcon:
                                     Icon(Icons.mic, color: Color(0xff444e72)),
@@ -82,15 +84,15 @@ class _LocationScreenState extends State<LocationScreen> {
                                 fillColor: Colors.white70,
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius:
-                                      BorderRadius.all(Radius.circular(20.0)),
-                                  borderSide:
-                                      BorderSide(color: Colors.white, width: 2),
+                                      BorderRadius.all(Radius.circular(20.r)),
+                                  borderSide: BorderSide(
+                                      color: Colors.white, width: 2.w),
                                 ),
                                 focusedBorder: OutlineInputBorder(
                                   borderRadius:
-                                      BorderRadius.all(Radius.circular(20.0)),
-                                  borderSide:
-                                      BorderSide(color: Colors.white, width: 2),
+                                      BorderRadius.all(Radius.circular(20.r)),
+                                  borderSide: BorderSide(
+                                      color: Colors.white, width: 2.w),
                                 ),
                               ),
                               style: buttonTextStyle,
@@ -100,10 +102,10 @@ class _LocationScreenState extends State<LocationScreen> {
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(top: 25.0),
+                            padding: EdgeInsets.only(top: 25.h),
                             child: ConstrainedBox(
-                              constraints: const BoxConstraints.tightFor(
-                                  width: 220.0, height: 55.0),
+                              constraints: BoxConstraints.tightFor(
+                                  width: 230.w, height: 60.h),
                               child: ElevatedButton(
                                 style: ButtonStyle(
                                   backgroundColor:
@@ -115,7 +117,7 @@ class _LocationScreenState extends State<LocationScreen> {
                                   shape:
                                       MaterialStateProperty.all<OutlinedBorder>(
                                     RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(20.0),
+                                      borderRadius: BorderRadius.circular(20.r),
                                     ),
                                   ),
                                   shadowColor: MaterialStateProperty.all<Color>(
@@ -126,8 +128,6 @@ class _LocationScreenState extends State<LocationScreen> {
                                   style: buttonTextStyle,
                                 ),
                                 onPressed: () {
-                                  // Navigator.pop(context, cityName);
-
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(

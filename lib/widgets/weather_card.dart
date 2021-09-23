@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:weather_app/utilities/constants.dart';
 
 class WeatherCard extends StatelessWidget {
@@ -22,27 +24,27 @@ class WeatherCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 300.0,
-      height: 310.0,
+      width: 320.w,
+      height: 350.h,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(20.r),
         color: Colors.white.withOpacity(0.4),
         border: Border.all(
           color: const Color(0xffafc3d7),
-          width: 3.5,
+          width: 3.5.w,
         ),
       ),
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: EdgeInsets.all(8.w),
             child: Text(
               day,
               style: cardTextStyle,
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 10.0),
+            padding: EdgeInsets.only(left: 10.w),
             child: GestureDetector(
                 child: Text('${temp.toString()}°', style: cardTempTextStyle),
                 onTap: () {
@@ -60,7 +62,7 @@ class WeatherCard extends StatelessWidget {
                 }),
           ),
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: EdgeInsets.all(8.w),
             child: Text(desc, style: cardStatusTextSyle),
           ),
           Row(

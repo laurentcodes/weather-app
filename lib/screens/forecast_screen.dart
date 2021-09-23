@@ -1,10 +1,11 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:weather_app/utilities/constants.dart';
 import '../services/weather.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import 'package:weather_app/utilities/constants.dart';
 
 import 'package:weather_app/widgets/today_temps.dart';
 import 'package:weather_app/widgets/forecast.dart';
@@ -26,6 +27,8 @@ class _ForecastScreenState extends State<ForecastScreen> {
   List fiveDaysTemp = [];
   List fiveDaysDate = [];
   List fiveDaysIcon = [];
+
+  String day = '';
 
   WeatherModel weather = WeatherModel();
 
@@ -50,7 +53,7 @@ class _ForecastScreenState extends State<ForecastScreen> {
         for (int i = 0; i < fiveHoursData.length; i++) {
           var dateFiveHours = DateTime.fromMillisecondsSinceEpoch(
               fiveHoursData[i]['dt'] * 1000);
-          var day = DateFormat('HH:MM').format(dateFiveHours);
+          var dayTime = DateFormat('HH:MM').format(dateFiveHours);
 
           var dateFiveDays =
               DateTime.fromMillisecondsSinceEpoch(fiveDaysData[i]['dt'] * 1000);
@@ -62,8 +65,10 @@ class _ForecastScreenState extends State<ForecastScreen> {
           var conditionFiveDays = fiveDaysData[i]['weather'][0]['id'];
           var weatherIconFiveDays = weather.getWeatherIcon(conditionFiveDays);
 
+          day = DateFormat('MMM, d').format(dateFiveHours);
+
           fiveHoursTemp.add(fiveHoursData[i]['temp']);
-          fiveHoursTime.add(day);
+          fiveHoursTime.add(dayTime);
           fiveHoursIcon.add(weatherIconFiveHours);
 
           fiveDaysTemp.add(fiveDaysData[i]['temp']['day']);
@@ -89,19 +94,18 @@ class _ForecastScreenState extends State<ForecastScreen> {
         body: Stack(children: [
           Row(children: [
             Padding(
-              padding: const EdgeInsets.only(top: 105.0),
+              padding: EdgeInsets.only(top: 105.h),
               child: SvgPicture.asset('assets/svg/vector2.svg'),
             ),
             SvgPicture.asset('assets/svg/vector1.svg'),
           ]),
           SafeArea(
             child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 15.0),
+              padding: EdgeInsets.symmetric(vertical: 15.h),
               child: Column(
-                // mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                    padding: EdgeInsets.symmetric(horizontal: 30.w),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -112,7 +116,7 @@ class _ForecastScreenState extends State<ForecastScreen> {
                                 'assets/svg/back.svg',
                                 color: Colors.white,
                               ),
-                              const SizedBox(width: 15),
+                              SizedBox(width: 15.w),
                               const Text('Back', style: headingTextStyle),
                             ],
                           ),
@@ -130,16 +134,25 @@ class _ForecastScreenState extends State<ForecastScreen> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Padding(
-                        padding: EdgeInsets.only(top: 30.0, left: 30.0),
-                        child: Text(
-                          'Today - 5 Hours',
-                          style: historyHeadingTextStyle,
+                      Padding(
+                        padding: EdgeInsets.only(top: 30.h, left: 30.w, right: 30.w),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Text(
+                              'Today - 5 Hours',
+                              style: historyHeadingTextStyle,
+                            ),
+                            Text(
+                              day,
+                              style: bodyTextStyle
+                            ),
+                          ],
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 30.0, vertical: 30.0),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 30.w, vertical: 30.h),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -171,15 +184,15 @@ class _ForecastScreenState extends State<ForecastScreen> {
                           ],
                         ),
                       ),
-                      const Padding(
-                        padding: EdgeInsets.only(top: 30.0, left: 30.0),
-                        child: Text(
-                          'Forecast - Next 5 Days',
+                      Padding(
+                        padding: EdgeInsets.only(top: 30.h, left: 30.w),
+                        child: const Text(
+                          'Next Forecast - 5 Days',
                           style: historyHeadingTextStyle,
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 30.0),
+                        padding: EdgeInsets.only(top: 30.h),
                         child: Column(
                           children: [
                             Forecast(

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:weather_app/utilities/constants.dart';
-import 'package:weather_app/services/weather.dart';
 
 class NotificationScreen extends StatefulWidget {
   NotificationScreen({this.message = '', this.conditionIcon = ''});
@@ -42,12 +43,12 @@ class _NotificationScreenState extends State<NotificationScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(30.0),
-      decoration: const BoxDecoration(
+      padding: EdgeInsets.all(30.w),
+      decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(40.0),
-          topRight: Radius.circular(40.0),
+          topLeft: Radius.circular(40.r),
+          topRight: Radius.circular(40.r),
         ),
       ),
       child: Column(
@@ -68,7 +69,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
             ],
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 30.0),
+            padding: EdgeInsets.symmetric(vertical: 30.h),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -78,7 +79,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                     weatherMessage,
                     style: notificationBodyTextStyle,
                   ),
-                  width: 250.0,
+                  width: 265.w,
                 ),
                 SvgPicture.asset('assets/svg/chevron_down.svg'),
               ],

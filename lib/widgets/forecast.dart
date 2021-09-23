@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app/utilities/constants.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Forecast extends StatelessWidget {
   Forecast({this.temp = 0, this.icon = '', this.date = ''});
@@ -11,7 +12,7 @@ class Forecast extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 20.0),
+      padding: EdgeInsets.symmetric(vertical: 15.h),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
