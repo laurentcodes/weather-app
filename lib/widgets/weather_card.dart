@@ -62,34 +62,29 @@ class WeatherCard extends StatelessWidget {
                   }
                 }),
           ),
+          Text(desc, style: cardStatusTextSyle),
           Padding(
-            padding: EdgeInsets.all(8.w),
-            child: Text(desc, style: cardStatusTextSyle),
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 10.h),
+            padding: EdgeInsets.symmetric(vertical: 8.h),
             child: Column(
               children: [
                 Padding(
-                  padding: EdgeInsets.symmetric(vertical: 10.h),
+                  padding: EdgeInsets.only(bottom: 8.h),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       SvgPicture.asset('assets/svg/wind.svg'),
                       const Text('Wind', style: cardTextStyle),
-                      // const Text('|', style: cardTextStyle),
                       Text('${wind.toString()} km/h', style: cardTextStyle),
                     ],
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(vertical: 10.h),
+                  padding: EdgeInsets.only(top: 8.h),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       SvgPicture.asset('assets/svg/humidity.svg'),
                       const Text('Hum     ', style: cardTextStyle),
-                      // const Text('|', style: cardTextStyle),
                       Text('${hum.toString()} %', style: cardTextStyle),
                     ],
                   ),

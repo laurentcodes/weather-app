@@ -160,7 +160,7 @@ class _LocationInfoScreenState extends State<LocationInfoScreen> {
                       },
                     ),
                     Center(
-                      child: Text(weatherIcon, style: weatherIconTextStyle),
+                      child: Text(weatherIcon, style: bodyWeatherIconTextStyle),
                     ),
                     WeatherCard(
                       day: day,

@@ -1,17 +1,30 @@
 import 'package:flutter/material.dart';
 
+// Heading Constants
 const headingTextStyle = TextStyle(
   fontSize: 22.0,
   color: Colors.white,
 );
 
-const cardTextStyle = TextStyle(
-  fontSize: 18.0,
+// Body Constants
+const bodyTextStyle = TextStyle(
+  fontSize: 20.0,
   color: Colors.white,
 );
 
-const weatherIconTextStyle = TextStyle(
+const bodyTextIconStyle = TextStyle(
+  fontSize: 30.0,
+  color: Colors.white,
+);
+
+const bodyWeatherIconTextStyle = TextStyle(
   fontSize: 170.0,
+);
+
+// Card Constants
+const cardTextStyle = TextStyle(
+  fontSize: 18.0,
+  color: Colors.white,
 );
 
 const cardStatusTextSyle = TextStyle(
@@ -28,7 +41,7 @@ const cardStatusTextSyle = TextStyle(
 );
 
 const cardTempTextStyle = TextStyle(
-  fontSize: 85.0,
+  fontSize: 80.0,
   color: Colors.white,
   shadows: [
     Shadow(
@@ -39,11 +52,7 @@ const cardTempTextStyle = TextStyle(
   ],
 );
 
-const buttonTextStyle = TextStyle(
-  fontSize: 18.0,
-  color: Color(0xff444e72),
-);
-
+// Notification Constants
 const notificationHeadTextStyle = TextStyle(
   fontSize: 22.0,
   color: Color(0xff444e72),
@@ -60,6 +69,7 @@ const notificationIconTextStyle = TextStyle(
   fontSize: 26.0,
 );
 
+// History Constants
 const historyHeadingTextStyle = TextStyle(
   fontSize: 22.0,
   color: Colors.white,
@@ -73,12 +83,8 @@ const historyHeadingTextStyle = TextStyle(
   ],
 );
 
-const bodyTextStyle = TextStyle(
-  fontSize: 20.0,
-  color: Colors.white,
-);
-
-const bodyTextIconStyle = TextStyle(
-  fontSize: 30.0,
-  color: Colors.white,
+// Button COnstants
+const buttonTextStyle = TextStyle(
+  fontSize: 18.0,
+  color: Color(0xff444e72),
 );

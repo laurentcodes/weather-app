@@ -189,7 +189,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ],
                   ),
                   Center(
-                    child: Text(weatherIcon, style: weatherIconTextStyle),
+                    child: Text(weatherIcon, style: bodyWeatherIconTextStyle),
                   ),
                   WeatherCard(
                     day: day,
