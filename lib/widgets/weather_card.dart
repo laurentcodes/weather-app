@@ -25,7 +25,7 @@ class WeatherCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 320.w,
-      height: 350.h,
+      height: 380.h,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20.r),
         color: Colors.white.withOpacity(0.4),
@@ -35,6 +35,7 @@ class WeatherCard extends StatelessWidget {
         ),
       ),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Padding(
             padding: EdgeInsets.all(8.w),

@@ -11,7 +11,7 @@ const cardTextStyle = TextStyle(
 );
 
 const weatherIconTextStyle = TextStyle(
-  fontSize: 180.0,
+  fontSize: 170.0,
 );
 
 const cardStatusTextSyle = TextStyle(
@@ -28,7 +28,7 @@ const cardStatusTextSyle = TextStyle(
 );
 
 const cardTempTextStyle = TextStyle(
-  fontSize: 90.0,
+  fontSize: 85.0,
   color: Colors.white,
   shadows: [
     Shadow(
