@@ -62,7 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {
       if (weatherData == null) {
         temperature = 0;
-        weatherIcon = 'Error';
+        weatherIcon = '';
         weatherMessage = 'Unable to get weather data';
         cityName = '';
         windSpeed = 0;
@@ -72,53 +72,28 @@ class _HomeScreenState extends State<HomeScreen> {
 
         return;
       } else {
-        if (weatherData['coord'] != null) {
-          dynamic temp = weatherData['main']['temp'];
-          temperature = temp.toInt();
+        dynamic temp = weatherData['current']['temp'];
+        temperature = temp.toInt();
 
-          dynamic wind = weatherData['wind']['speed'];
-          windSpeed = wind.toInt();
+        dynamic wind = weatherData['current']['wind_speed'];
+        windSpeed = wind.toInt();
 
-          dynamic hum = weatherData['main']['humidity'];
-          humidity = hum.toInt();
+        dynamic hum = weatherData['current']['humidity'];
+        humidity = hum.toInt();
 
-          dynamic timeStamp = weatherData['dt'];
+        dynamic timeStamp = weatherData['current']['dt'];
 
-          var date = DateTime.fromMillisecondsSinceEpoch(timeStamp * 1000);
-          day = DateFormat('EEEE, d MMMM').format(date);
+        var date = DateTime.fromMillisecondsSinceEpoch(timeStamp * 1000);
+        day = DateFormat('EEEE, d MMMM').format(date);
 
-          description = weatherData['weather'][0]['main'];
+        description = weatherData['current']['weather'][0]['main'];
 
-          var condition = weatherData['weather'][0]['id'];
+        var condition = weatherData['current']['weather'][0]['id'];
 
-          weatherIcon = weather.getWeatherIcon(condition);
-          weatherMessage = weather.getMessage(temperature);
+        weatherIcon = weather.getWeatherIcon(condition);
+        weatherMessage = weather.getMessage(temperature);
 
-          cityName = weatherData['name'];
-        } else {
-          dynamic temp = weatherData['current']['temp'];
-          temperature = temp.toInt();
-
-          dynamic wind = weatherData['current']['wind_speed'];
-          windSpeed = wind.toInt();
-
-          dynamic hum = weatherData['current']['humidity'];
-          humidity = hum.toInt();
-
-          dynamic timeStamp = weatherData['current']['dt'];
-
-          var date = DateTime.fromMillisecondsSinceEpoch(timeStamp * 1000);
-          day = DateFormat('EEEE, d MMMM').format(date);
-
-          description = weatherData['current']['weather'][0]['main'];
-
-          var condition = weatherData['current']['weather'][0]['id'];
-
-          weatherIcon = weather.getWeatherIcon(condition);
-          weatherMessage = weather.getMessage(temperature);
-
-          cityName = weatherData['timezone'];
-        }
+        cityName = weatherData['timezone'];
       }
     });
   }
@@ -160,18 +135,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           color: Colors.white,
                         ),
                         onTap: () async {
-                          var typedName = await Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const LocationScreen()),
-                          );
-
-                          if (typedName != null) {
-                            var weatherData =
-                                await weather.getCityWeather(typedName);
-
-                            updateUI(weatherData);
-                          }
+                          Navigator.pushNamed((context), '/location');
                         },
                       ),
                       Text(cityName, style: headingTextStyle),

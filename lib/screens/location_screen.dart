@@ -77,8 +77,8 @@ class _LocationScreenState extends State<LocationScreen> {
                                 contentPadding: EdgeInsets.only(
                                     left: 30.w, top: 15.h, bottom: 15.h),
                                 // prefixIcon: Icon(Icons.arrow_back),
-                                suffixIcon:
-                                    Icon(Icons.mic, color: Color(0xff444e72)),
+                                suffixIcon: const Icon(Icons.mic,
+                                    color: Color(0xff444e72)),
                                 hintStyle: buttonTextStyle,
                                 filled: true,
                                 fillColor: Colors.white70,
