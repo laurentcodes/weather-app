@@ -38,8 +38,7 @@ class _LocationInfoScreenState extends State<LocationInfoScreen> {
     super.initState();
 
     getWeatherData() async {
-      var weatherData =
-          await weather.getCityWeather(widget.city).then((result) {
+      await weather.getCityWeather(widget.city).then((result) {
         updateUI(result);
       });
     }
@@ -61,53 +60,28 @@ class _LocationInfoScreenState extends State<LocationInfoScreen> {
 
         return;
       } else {
-        if (weatherData['coord'] != null) {
-          dynamic temp = weatherData['main']['temp'];
-          temperature = temp.toInt();
+        dynamic temp = weatherData['main']['temp'];
+        temperature = temp.toInt();
 
-          dynamic wind = weatherData['wind']['speed'];
-          windSpeed = wind.toInt();
+        dynamic wind = weatherData['wind']['speed'];
+        windSpeed = wind.toInt();
 
-          dynamic hum = weatherData['main']['humidity'];
-          humidity = hum.toInt();
+        dynamic hum = weatherData['main']['humidity'];
+        humidity = hum.toInt();
 
-          dynamic timeStamp = weatherData['dt'];
+        dynamic timeStamp = weatherData['dt'];
 
-          var date = DateTime.fromMillisecondsSinceEpoch(timeStamp * 1000);
-          day = DateFormat('EEEE, d MMMM').format(date);
+        var date = DateTime.fromMillisecondsSinceEpoch(timeStamp * 1000);
+        day = DateFormat('EEEE, d MMMM').format(date);
 
-          description = weatherData['weather'][0]['main'];
+        description = weatherData['weather'][0]['main'];
 
-          var condition = weatherData['weather'][0]['id'];
+        var condition = weatherData['weather'][0]['id'];
 
-          weatherIcon = weather.getWeatherIcon(condition);
-          weatherMessage = weather.getMessage(temperature);
+        weatherIcon = weather.getWeatherIcon(condition);
+        weatherMessage = weather.getMessage(temperature);
 
-          cityName = weatherData['name'];
-        } else {
-          dynamic temp = weatherData['current']['temp'];
-          temperature = temp.toInt();
-
-          dynamic wind = weatherData['current']['wind_speed'];
-          windSpeed = wind.toInt();
-
-          dynamic hum = weatherData['current']['humidity'];
-          humidity = hum.toInt();
-
-          dynamic timeStamp = weatherData['current']['dt'];
-
-          var date = DateTime.fromMillisecondsSinceEpoch(timeStamp * 1000);
-          day = DateFormat('EEEE, d MMMM').format(date);
-
-          description = weatherData['current']['weather'][0]['main'];
-
-          var condition = weatherData['current']['weather'][0]['id'];
-
-          weatherIcon = weather.getWeatherIcon(condition);
-          weatherMessage = weather.getMessage(temperature);
-
-          cityName = weatherData['timezone'];
-        }
+        cityName = weatherData['name'];
       }
     });
   }
